@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   getSchedule() {
-    this.api.getRepaymentSchedule({ period: 14, amount: 362730, rate: 9.75 })
+    this.api.getRepaymentSchedule({ period: this.months, amount: this.amount, rate: 10 })
       .then((res: any) => {
         if (res.success) {
           this.showSchedule = true;
