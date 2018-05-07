@@ -1,0 +1,24 @@
+.card-title{
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+h5{
+    font-size: 15pt;
+}
+h1,h2,h3,h4,h5,h6, .card-title{
+    font-family: 'Poppins';
+}
+
+.collection-margin {
+    margin:5px 5px 5px 5px;
+}
+
+body, p ,card {
+    font-family: 'Lato';
+}
+
+a, button{
+    text-transform: capitalize;
+    margin:2px 2px;
+}
