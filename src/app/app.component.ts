@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnChanges {
       .then((res: any) => {
         if (res.success) {
           this.pmt = res.amount;
-          this.message = this.message;
+          this.message = res.message;
         }
       })
   }
