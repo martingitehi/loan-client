@@ -8,8 +8,7 @@ import { API } from '../services/api-services';
 
 const appRoutes: Routes = [
   { path: 'home', component: AppComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', component: AppComponent}
 ]
 
 @NgModule({
