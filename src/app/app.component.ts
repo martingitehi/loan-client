@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnChanges {
           this.message = res.message;
         }
       })
+      this.getSchedule();
   }
 
   getSchedule() {
