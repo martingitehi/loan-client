@@ -35,7 +35,7 @@
             <button class="btn waves-effect" (click)="toggleView()">Back</button>
           </div> -->
           <br>
-          <div>
+          <div *ngIf="showSchedule">
             <ul class="collection collection-margin" *ngFor="let repayment of schedule">
               <li class="collection-item">
                 <span class="card-title">
@@ -51,10 +51,6 @@
             </ul>
           </div>
         </div>
-
-        <div *ngIf="showSchedule">
-        </div>
-
       </div>
     </div>
   </div>
