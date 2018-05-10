@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnChanges {
   showSchedule: boolean = false;
 
   constructor(private api: API) {
-
+    this.calculatePMT()
   }
 
   ngOnInit() {
@@ -50,7 +50,12 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   toggleView() {
-    this.showSchedule == false ? this.showSchedule = true : this.showSchedule = false;
+    if (this.showSchedule == false) {
+      this.showSchedule = true;
+    }
+    else {
+      this.showSchedule = false;
+    }
   }
 
 }
