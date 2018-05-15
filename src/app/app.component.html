@@ -1,71 +1,56 @@
-<div class="row" style="justify-content: center; vertical-align: middle; margin-top:5%;">
-  <div class="col s6 offset-s3">
-    <div class="card">
-      <div class="card-content">
-        <div *ngIf="!showSchedule">
-          <span class="card-title">Personal loan upto K20,000</span>
-          <h5>How much would you like to borrow?</h5>
-          <p class="range-field">
-            <input type="range" [(ngModel)]="amount" name="amount" min="0" step="1000" max="1000000" value="20000" />
-          </p>
-          <p>{{amount | number:'1.0-0'}}</p>
-          <h5>For how many months?</h5>
-          <p class="range-field">
-            <input type="range" [(ngModel)]="months" name="months" min="0" max="48" value="6" />
-          </p>
-          <p>{{months}}</p>
-          <br><br>
-          <div>
-            <ul class="collection collection-margin">
-              <li class="collection-item">Monthly Repayment
-                <span class="secondary-content" [(ngModel)]="pmt">{{pmt | number:'1.0-0'}}</span>
-              </li>
-              <li class="collection-item" *ngIf="message !== ''">
-                {{message}}
-              </li>
-            </ul>
-          </div>
-          <div class="card-action">
-            <button class="btn waves-effect" (click)="calculatePMT()">Calculate</button>
-          </div>
-          <hr>
-          <span class="card-title">Repayment Schedule</span>
-          <br>
-          <div *ngIf="showSchedule">
-            <ul class="collection collection-margin" *ngFor="let repayment of schedule">
-              <li class="collection-item">
-                <span class="card-title">
-                  <b>Payment {{repayment.paymentNo + 1}}</b>
-                </span>
-                <br> Principal
-                <b>{{repayment.principle | number:'1.0-0'}}</b> | Interest:
-                <b>{{repayment.interest | number:'1.0-0'}}</b> :
-                <span class="secondary-content">Bal:
-                  <b>{{repayment.balance | number:'1.0-0'}}</b>
-                </span>
-              </li>
-            </ul>
-          </div>
+<div class="row" style="justify-content: center; vertical-align: middle; margin-top:2%;">
+  <div class="card">
+    <div class="card-content">
+      <!-- loan details -->
+      <div>
+        <span class="card-title">Personal loan upto KES1,000,000</span>
+        <h5>How much would you like to borrow?</h5>
+        <p class="range-field">
+          <input type="range" [(ngModel)]="amount" name="amount" value="250000" min="0" step="1000" max="1000000" />
+        </p>
+        <p>{{amount | number:'1.0-0'}}</p>
+        <h5>For how many months?</h5>
+        <p class="range-field">
+          <input type="range" [(ngModel)]="months" name="months" value="8" min="0" max="48" />
+        </p>
+        <p>{{months}}</p>
+        <br>
+        <br>
+        <div>
+          <ul class="collection collection-margin">
+            <li class="collection-item">Monthly Repayment
+              <span class="secondary-content" [(ngModel)]="pmt">{{pmt | number:'1.0-0'}}</span>
+            </li>
+            <li class="collection-item" *ngIf="message !== ''">
+              {{message}}
+            </li>
+          </ul>
+        </div>
+        <div class="card-action">
+          <button class="btn waves-effect" (click)="calculate()">Calculate</button>
+        </div>
+        <hr>
+        <span class="card-title">Repayment Schedule</span>
+        <br>
+        <br>
+        <!-- repayment schedule -->
+        <div>
+          <ul class="collection collection-margin" *ngFor="let repayment of schedule">
+            <li class="collection-item">
+              <span class="card-title">
+                <b>Payment {{repayment.paymentNo + 1}}</b>
+              </span>
+              <br> Principal
+              <b>{{repayment.principal | number:'1.0-0'}}</b> | Interest:
+              <b>{{repayment.interest | number:'1.0-0'}}</b> | Total: 
+              <b>{{repayment.interest + repayment.principal | number:'1.0-0'}}</b> 
+              <span class="secondary-content">Bal:
+                <b>{{repayment.balance | number:'1.0-0'}}</b>
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<script>
-  var slider = document.getElementById('amt-slide');
-  noUiSlider.create(slider, {
-    connect: true,
-    tooltips: true,
-    step: 500,
-    orientation: 'horizontal', // 'horizontal' or 'vertical'
-    range: {
-      'min': 0,
-      'max': 1000000
-    },
-    format: wNumb({
-      decimals: 0
-    })
-  });
-</script>

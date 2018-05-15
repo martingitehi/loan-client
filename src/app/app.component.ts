@@ -11,21 +11,19 @@ export class AppComponent implements OnInit, OnChanges {
 
   pmt: Number = 0;
   schedule: any[] = [];
-  months: number = 14;
-  amount: number = 245000;
+  months: number = 8;
+  amount: number = 250000;
   message = '';
-  showSchedule: boolean = false;
 
   constructor(private api: API) {
-    this.calculatePMT()
   }
 
   ngOnInit() {
-    this.calculatePMT()
+    this.calculate()
   }
 
   ngOnChanges() {
-    this.calculatePMT()
+    this.calculate()
   }
 
   ///calculate the PMT value for use in gettting the repayment schedule
@@ -37,26 +35,21 @@ export class AppComponent implements OnInit, OnChanges {
           this.message = res.message;
         }
       })
-      this.getSchedule();
   }
 
   getSchedule() {
     this.api.getRepaymentSchedule({ period: this.months, amount: this.amount, rate: 10 })
       .then((res: any) => {
         if (res.success) {
-          this.showSchedule = true;
           this.schedule = res.schedule;
+          console.log(this.schedule)
         }
       })
   }
 
-  toggleView() {
-    if (this.showSchedule == false) {
-      this.showSchedule = true;
-    }
-    else {
-      this.showSchedule = false;
-    }
+  calculate(){
+    this.calculatePMT()
+    this.getSchedule()
   }
 
 }
