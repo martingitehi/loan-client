@@ -1,55 +1,33 @@
-import { Component, ViewChild, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { API } from '../services/api-services';
 
+
 @Component({
-  selector: 'app-root',
+  selector: 'app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnChanges {
-  title = 'Loan Amortizer';
-
-  pmt: Number = 0;
-  schedule: any[] = [];
-  months: number = 8;
-  amount: number = 250000;
+export class AppComponent {
+  title = 'Movie Buff';
+  user?: any;
+  files: string[] = [];
   message = '';
+  type = 'jpg';
 
-  constructor(private api: API) {
+  constructor(private api:API) {
+    this.user = localStorage.getItem('buffy_user') ? JSON.parse(localStorage.getItem('buffy_user')) : null;
   }
 
-  ngOnInit() {
-    this.calculate()
-  }
-
-  ngOnChanges() {
-    this.calculate()
-  }
-
-  ///calculate the PMT value for use in gettting the repayment schedule
-  calculatePMT() {
-    this.api.calculatePmt({ period: this.months, amount: this.amount, rate: 10 })
+  
+  //get the files
+  getFiles() {
+    this.api.getFiles()
       .then((res: any) => {
         if (res.success) {
-          this.pmt = res.amount;
-          this.message = res.message;
+          this.files = res.files;
+          this.message = `${res.records} ${this.type.toLocaleUpperCase()} files found.`;
         }
       })
-  }
-
-  getSchedule() {
-    this.api.getRepaymentSchedule({ period: this.months, amount: this.amount, rate: 10 })
-      .then((res: any) => {
-        if (res.success) {
-          this.schedule = res.schedule;
-          console.log(this.schedule)
-        }
-      })
-  }
-
-  calculate(){
-    this.calculatePMT()
-    this.getSchedule()
   }
 
 }

@@ -18,8 +18,8 @@ const forceSSL = function () {
 //serve over https
 app.use(forceSSL())
 
-app.use(express.static(__dirname + '/dist/loan-amortization-client'));
+app.use(express.static(__dirname + '/dist/file-online'));
 app.listen(process.env.PORT || 8080);
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/dist/loan-amortization-client/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/file-online/index.html'));
 });

@@ -3,17 +3,176 @@
 <head>
   <base href="/">
   <meta charset="utf-8">
-  <title>Loan Amortizer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-   <!-- Compiled and minified CSS -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-
-   <!-- Compiled and minified JavaScript -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Poppins" rel="stylesheet">
+  <title>MovieBuff</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
+    crossorigin="anonymous" type="text/css">
+  <link rel="stylesheet" href="./styles.css">
+     <!-- Compiled and minified CSS -->
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Poppins" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/dashboard.css" type="text/css" media="all">-->
+   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Poppins" rel="stylesheet"> 
 </head>
-<body>
-  <app-root></app-root>
+
+<body style="font-family: 'Poppins', Lato, sans-serif;">
+  <app>
+    <style>
+      app {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: black;
+        text-transform: uppercase;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h1,h2,h3,h4,h5,h6{
+        font-family: 'Lato', sans-serif;
+      }
+
+      body {
+        background: white;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <div class="lds-css ng-scope">
+      <div style="width:100%;height:100%" class="lds-flickr">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <style type="text/css">
+        @keyframes lds-flickr-opacity {
+          0% {
+            -webkit-transform: translate(0 0);
+            transform: translate(0 0);
+            opacity: 1;
+          }
+          49.99% {
+            opacity: 1;
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          50% {
+            opacity: 0;
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          100% {
+            opacity: 0;
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+
+        @-webkit-keyframes lds-flickr-opacity {
+          0% {
+            -webkit-transform: translate(0 0);
+            transform: translate(0 0);
+            opacity: 1;
+          }
+          49.99% {
+            opacity: 1;
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          50% {
+            opacity: 0;
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          100% {
+            opacity: 0;
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+
+        @keyframes lds-flickr {
+          0% {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+          50% {
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          100% {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+
+        @-webkit-keyframes lds-flickr {
+          0% {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+          50% {
+            -webkit-transform: translate(80px, 0);
+            transform: translate(80px, 0);
+          }
+          100% {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+
+        .lds-flickr {
+          position: relative;
+        }
+
+        .lds-flickr div {
+          position: absolute;
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          top: 60px;
+          left: 20px;
+        }
+
+        .lds-flickr div:nth-child(1) {
+          background: #fcb711;
+          -webkit-animation: lds-flickr 1s linear infinite;
+          animation: lds-flickr 1s linear infinite;
+          -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+        }
+
+        .lds-flickr div:nth-child(2) {
+          background: #f37021;
+          -webkit-animation: lds-flickr 1s linear infinite;
+          animation: lds-flickr 1s linear infinite;
+          -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+        }
+
+        .lds-flickr div:nth-child(3) {
+          background: #fcb711;
+          -webkit-animation: lds-flickr-opacity 1s linear infinite;
+          animation: lds-flickr-opacity 1s linear infinite;
+          -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+        }
+
+        .lds-flickr {
+          width: 200px !important;
+          height: 200px !important;
+          -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+          transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+        }
+      </style>
+    </div>
+  </app>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
 </html>

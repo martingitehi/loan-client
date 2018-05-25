@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { environment } from '../environments/environment';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 
 export class API {
     url: string;
-    constructor(private http:Http) {
+    authUrl: string;
+
+    constructor(private http: Http) {
         this.url = environment.url;
+        this.authUrl = environment.authUrl;
         this.http = http;
     }
 
     //calculate
-    calculatePmt(pmt: any) {
-        let body = JSON.stringify(pmt);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    getFiles() {
+        let url = `${this.url}/files`;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         return new Promise((resolve, reject) => {
-            return this.http.post(this.url + '/api/calculate', body, options)
+            return this.http.get(url, options)
                 .subscribe((data) => {
                     if (data) {
                         resolve(data.json());
@@ -30,13 +34,12 @@ export class API {
         })
     }
 
-    //get schedule
-    getRepaymentSchedule(pvif: any) {
-        let body = JSON.stringify(pvif);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    //download file
+    downloadFile(id: string, query: string) {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         return new Promise((resolve, reject) => {
-            return this.http.post(this.url + '/api/get-schedule', body, options)
+            return this.http.get(`${this.url}/files/${id}${query}`, options)
                 .subscribe((data) => {
                     if (data) {
                         resolve(data.json());
@@ -48,6 +51,33 @@ export class API {
         })
     }
 
+    login(user: User): Promise<any> {
+        let body = JSON.stringify(user);
+        let headers = new Headers({ 'Content-Type': 'application/json' })
+        let options = new RequestOptions({ headers: headers })
+        return new Promise(resolve => {
+            return this.http.post(this.authUrl + '/login', body, options)
+                .subscribe((data) => {
+                    resolve(data.json())
+                })
+        })
+    }
+
+    getUserInfo(token: string): Promise<any> {
+        return new Promise(resolve => {
+            let headers = new Headers();
+            headers.append('Authorization', 'Bearer ' + token);
+            this.http.get(this.authUrl + '/decode', { headers: headers })
+                .subscribe(data => {
+                    if (data.json().success) {
+                        resolve(data.json());
+                    }
+                    else {
+                        resolve(false);
+                    }
+                });
+        });
+    }
 
     extractData(res: Response) {
         return res.json();

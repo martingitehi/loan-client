@@ -1,0 +1,100 @@
+<div class="container">
+	<div class="row">
+		<!-- <div class="col-3 col-md-1 sidebar">
+		<ul class="nav nav-sidebar">
+			<li class="text-center">
+				<a routerLink="/">
+					<h4>
+						<i class="fa fa-film"></i>
+					</h4>
+					Videos
+				</a>
+			</li>
+			<li class="text-center">
+				<a routerLink="/">
+					<h4>
+						<i class="fa fa-music"></i>
+					</h4>
+					Music
+				</a>
+			</li>
+			<li class="text-center">
+				<a routerLink="/">
+					<h4>
+						<i class="fa fa-folder"></i>
+					</h4>
+					Documents
+				</a>
+			</li>
+			<li class="text-center">
+				<a routerLink="/">
+					<h4>
+						<i class="fa fa-image"></i>
+					</h4>
+					Pictures
+				</a>
+			</li>
+		</ul>
+	</div> -->
+
+		<div class="col-12 offset-1 col-md-10 main">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" id="filter" name="filter" [(ngModel)]="filter" placeholder="Search" aria-label="Search"
+						 aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button type="submit" (click)="getFiles()" class="btn btn-danger">Search</button>
+						</div>
+						<br>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-danger" (click)="toggleType('mp4')">Videos</button>
+							<button type="button" class="btn btn-danger" (click)="toggleType('mp3')">Music</button>
+							<button type="button" class="btn btn-danger" (click)="toggleType('jpg')">Photos</button>
+						</div>
+					</div>
+					<hr>
+					<div class="row" style="justify-content: center; vertical-align: middle; margin-top:2%; ">
+						<div class="col-md-3 col-6" *ngFor="let file of files | orderby:['short_name'] | filterby: {'short_name':filter}" style="display:inline-block; padding: 5px 5px;">
+							<div class="card" *ngIf="type=='jpg' ||type=='png' || type=='gif'">
+								<img class="card-img-top img-fluid" src="http://127.0.0.1:3000/media/files/{{file.short_name}}">
+								<div class="card-body">
+									<h5 class="card-title">{{file.short_name}}</h5>
+								</div>
+							</div>
+							<h2 *ngIf="type=='pdf'" class="text-danger">
+								<div class="card">
+									<i class="fa fa-file"></i>
+								</div>
+							</h2>
+							<div class="card" *ngIf="type=='mp4' || type=='avi'">
+								<a routerLink="/watch/{{file.short_name}}">
+									<video src="http://127.0.0.1:3000/media/files/{{file.short_name}}" crossorigin="anonymous" class="card-img-top img-fluid"
+									 force-refresh-images="true" poster preload="auto" width="100%;"></video>
+								</a>
+								<hr>
+								<div class="card-body">
+									<small class="card-title" style="overflow: hidden; text-overflow: ellipsis;">{{file.short_name}}
+									</small>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="type=='mp3'">
+							<ul class="list-group list-group-flush" *ngFor="let file of files | orderby:['short_name'] | filterby: {'short_name':filter}">
+								<li class="list-group-item">
+									<div class="card-title">
+										<b>{{file.short_name}} &middot; {{file.size}}
+										</b>
+									</div>
+									<audio src="http://127.0.0.1:3000/media/files/{{file.short_name}}" controls crossorigin="anonymous" force-refresh-images="true"
+									 muted></audio>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
