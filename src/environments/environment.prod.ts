@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-    url: ' https://loaner.herokuapp.com'
+    url: ' http://loaner.herokuapp.com/media',
+    authUrl: 'http://loaner.herokuapp.com/auth'
 };
